@@ -42,7 +42,7 @@ room['treasure'].s_to = room['narrow']
 # Make a new player object that is currently in the 'outside' room.
 
 new_player = Player("Amarachi", "outside")
-
+print("Current Room of New Player:", new_player.current_room)
 # Write a loop that:
 #
 # * Prints the current room name
@@ -53,7 +53,7 @@ new_player = Player("Amarachi", "outside")
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-move_choices: ["n", "e", "s", "w"]
+move_choices = ["n", "e", "s", "w"]
 
 while True:
     player_move = input("Type n/e/s/w to move or q to quit the game:")
@@ -62,19 +62,22 @@ while True:
         # directions
         if player_move == "n":
             # something
-            room[new_player.current_room].n_to
+            new_room = room[new_player.current_room].n_to
+        
         elif player_move == "e":
             # something
-            room[new_player.current_room].e_to
+            new_room = room[new_player.current_room].e_to
+        
         elif player_move == "s":
             # something
-            room[new_player.current_room].s_to
+            new_room = room[new_player.current_room].s_to
+        
         elif player_move == "w":
             # something
-            room[new_player.current_room].w_to
+            new_room = room[new_player.current_room].w_to
     elif player_move == "q":
         print("Thanks for playing!")
         break
     else:
         print("Invalid key. Please enter n/e/s/w or q to quit the game.")
-    print(f'You are in room: {room} \nDescription: "room.description"')
+    print(f'You are in {new_room}')
