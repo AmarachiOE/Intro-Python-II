@@ -66,7 +66,6 @@ while True:
         """
         if player_move == "n":
             # when player moves north
-            #new_room = room[new_player.current_room].n_to
             new_room = new_player.current_room.n_to
 
         elif player_move == "e":
@@ -82,16 +81,21 @@ while True:
             new_room = new_player.current_room.w_to
 
         """
-        Now change new_player's current_room to the new_room_name
+        Now change new_player's current_room to the new room
         """
-        
+        new_player = Player(player_name, new_room)
+
+        """
+        Alternative, Longer Way - SMH
         new_room_name = ""
         for key, value in room.items(): # for each key:value item in room dictionary:
             if value == new_room: # new_room is the variable/info being set from above statements
                 new_room_name = key # set the name of the new room to the key of that value
         # print("Name of New Room: ", new_room_name) # double check that this is correct
-        new_player = Player(player_name, room[new_room_name]) # Cool. Pass in the name of the new room to update the player's room in Player class
+        new_player = Player(player_name, room[new_room_name]) # Cool. Pass in the name of the new room to the room dictionary to update the player's room in the new player's Player class instance
+        """
 
+        
     elif player_move == "q":
         print(f'Thanks for playing, {player_name}!')
         break
