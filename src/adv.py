@@ -60,16 +60,16 @@ while True:
 
     if player_move in move_choices:
         # directions
-        if str(player_move) == "n":
+        if player_move == "n":
             # something
             room[new_player.current_room].n_to
-        elif str(player_move) == "e":
+        elif player_move == "e":
             # something
             room[new_player.current_room].e_to
-        elif str(player_move) == "s":
+        elif player_move == "s":
             # something
             room[new_player.current_room].s_to
-        elif str(player_move) == "w":
+        elif player_move == "w":
             # something
             room[new_player.current_room].w_to
     elif player_move == "q":
