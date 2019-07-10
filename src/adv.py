@@ -1,10 +1,10 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
 room = {
-    'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+    'outside':  Room("Outside Cave Entrance", "North of you, the cave mount beckons"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -23,7 +23,9 @@ earlier adventurers. The only exit is to the south."""),
 
 
 # Link rooms together
-
+# Creating room dictionary
+# Adding key:values to dictionary
+# room = {}
 room['outside'].n_to = room['foyer']
 room['foyer'].s_to = room['outside']
 room['foyer'].n_to = room['overlook']
@@ -39,6 +41,8 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
+new_player = Player("Amarachi", "outside")
+
 # Write a loop that:
 #
 # * Prints the current room name
@@ -49,3 +53,28 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+move_choices: ["n", "e", "s", "w"]
+
+while True:
+    player_move = input("Type n/e/s/w to move or q to quit the game:")
+
+    if player_move in move_choices:
+        # directions
+        if str(player_move) == "n":
+            # something
+            room[new_player.current_room].n_to
+        elif str(player_move) == "e":
+            # something
+            room[new_player.current_room].e_to
+        elif str(player_move) == "s":
+            # something
+            room[new_player.current_room].s_to
+        elif str(player_move) == "w":
+            # something
+            room[new_player.current_room].w_to
+    elif player_move == "q":
+        print("Thanks for playing!")
+        break
+    else:
+        print("Invalid key. Please enter n/e/s/w or q to quit the game.")
+    print(f'You are in room: {room} \nDescription: "room.description"')
