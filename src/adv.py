@@ -39,9 +39,10 @@ room['overlook'].e_to = room['treasure']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+player_name = input("Please type your name: ")
 
-new_player = Player("Amarachi", "outside")
-print(f'Welcome! Read the room descriptions to navigate to the treasure! \nYour current location is: {room[new_player.current_room]}')
+new_player = Player(player_name, room["outside"]) # Player(name, current_room)
+print(f'Welcome {player_name}! Read the room descriptions to navigate to the treasure! \nYour current location is: {new_player.current_room}')
 
 
 # Write a loop that:
@@ -65,22 +66,23 @@ while True:
         """
         if player_move == "n":
             # when player moves north
-            new_room = room[new_player.current_room].n_to
+            #new_room = room[new_player.current_room].n_to
+            new_room = new_player.current_room.n_to
 
         elif player_move == "e":
             # when player moves east
-            new_room = room[new_player.current_room].e_to
+            new_room = new_player.current_room.e_to
         
         elif player_move == "s":
             # when player moves south
-            new_room = room[new_player.current_room].s_to
+            new_room = new_player.current_room.s_to
         
         elif player_move == "w":
             # when player moves west
-            new_room = room[new_player.current_room].w_to
+            new_room = new_player.current_room.w_to
 
         """
-        Now change new_player's room to the new_room_name
+        Now change new_player's current_room to the new_room_name
         """
         
         new_room_name = ""
@@ -88,21 +90,18 @@ while True:
             if value == new_room: # new_room is the variable/info being set from above statements
                 new_room_name = key # set the name of the new room to the key of that value
         # print("Name of New Room: ", new_room_name) # double check that this is correct
-        new_player = Player("Amarachi", new_room_name) # Cool. Pass in the name of the new room to update the player's room in Player class
+        new_player = Player(player_name, room[new_room_name]) # Cool. Pass in the name of the new room to update the player's room in Player class
 
     elif player_move == "q":
-        print("Thanks for playing!")
+        print(f'Thanks for playing, {player_name}!')
         break
     
     else:
-        print("Invalid key. Please enter n/e/s/w or q to quit the game.")
+        print("Invalid key. Please type n/e/s/w to move or q to quit the game.")
     
-    print(f'Your new location is: {new_room}') # or:
-    # print(f'Your new location is: {room[new_player.current_room]}')
+    #print(f'Your new location is: {new_room}') # or:
+    print(f'Your new location is: {new_player.current_room}') # also double checks that update was successful
     
-
-    # double checking that update was successful
-    # print("New Location: ", new_player.current_room) 
 
 
     # EXTRA NOTES
