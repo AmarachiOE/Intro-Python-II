@@ -28,7 +28,8 @@ class Player:
     """
 
     def show_inventory(self):
-        print(f'Your Inventory: {", ".join([item.name for item in self.items])}')
+        print(
+            f'Your Inventory: {", ".join([item.name for item in self.items])}')
 
     """
     This is the on_take method:

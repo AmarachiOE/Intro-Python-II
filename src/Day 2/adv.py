@@ -81,7 +81,7 @@ while True:
     # Wait for user input
     # Record how many words the user entered (1 or 2?)
     # NOTE: .lower()[0] converts input to lowercase and only takes the first character to ultimately match move_choices list items
-    
+
     cmd = input(">>> ")
     split_cmd = cmd.split()
     input_count = len(split_cmd)
@@ -90,7 +90,7 @@ while True:
 
     # If input_count = 1 treat as navigation command:
     if input_count == 1:
-        cmd = cmd.lower()[0]  
+        cmd = cmd.lower()[0]
         # Parse user inputs (n, s, e, w, q)
         if cmd in move_choices:
             # If input is valid, move the player and loop
