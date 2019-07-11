@@ -108,9 +108,8 @@ while True:
         print("user entered 2 words")
         if split_cmd[0] == "get" or split_cmd[0] ==  "take":
             the_item = split_cmd[1]
-            player.get_item(the_item)
-            
-            print("User entered get or take. Implement get method.")
+            player.on_take(the_item)
+
         elif split_cmd[0] == "drop":
             print("User entered drop. Implement drop method.")
         else:

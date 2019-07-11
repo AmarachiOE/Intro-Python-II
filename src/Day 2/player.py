@@ -23,11 +23,16 @@ class Player:
     """
     This is the get method
     """    
-    def get_item(self, room_item):
+    def on_take(self, room_item):
         for item in self.current_room.items:
             if item.name.lower() == room_item.lower():
                 self.items.append(item)
-                print(f'Your Items: {", ".join([item.name for item in self.items])}')
+                self.current_room.items.remove(item)
+                item_message = f"""
+                \nYou have picked up "{item.name}"
+                \nYour Items: {", ".join([item.name for item in self.items])}
+                \n----------------------------------\n"""
+                print(item_message)
             
             else:
                 print("This item is not available in this room.")
