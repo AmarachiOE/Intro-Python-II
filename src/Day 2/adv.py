@@ -41,21 +41,31 @@ room['overlook'].e_to = room['treasure']
 # Main
 #
 
-# Create Items
-binoculars = Item("binoculars", "Use the binoculars to see far away places")
-flashlight = Item("flashlight", "Use the flashlight to see in dark places.")
-water = Item("water", "Drink water if you're tired!")
-#print(binoculars.name, flashlight.name, water.name)
 
 # Make a new player object that is currently in the 'outside' room.
-
 player_name = input("Please type your name: ")
 player = Player(player_name, room['outside']) # Player(name, current_room)
 current_room = player.current_room
 
-print(f'Welcome {player_name}! Read the room descriptions to navigate to the treasure! \n{current_room}')
+
+# Create Items
+binoculars = Item("Binoculars", "Use the binoculars to see far away places")
+flashlight = Item("Flashlight", "Use the flashlight to see in dark places.")
+boots = Item("Boots", "You may want these boots for your journey.")
+water = Item("Water", "Drink water if you're tired!")
+#print(binoculars.name, flashlight.name, water.name)
+
+# Add Items to Room and Player
+room["outside"].items.append(binoculars)
+room["outside"].items.append(boots)
+room["foyer"].items.append(flashlight)
+player.items.append(water)
+
+print(f'Welcome, {player_name}! Read the room descriptions to navigate to the treasure! \n{current_room}')
 
 move_choices = ["n", "s", "e", "w"]
+
+
 
 # Write a loop that:
 #
@@ -70,14 +80,31 @@ move_choices = ["n", "s", "e", "w"]
 
 while True:
     # Wait for user input
-    # .lower()[0] converts input to lowercase and only takes the first character to ultimately match move_choices list items
-    cmd = input(">>> Move: ").lower()[0]
-    # Parse user inputs (n, s, e, w, q)
-    if cmd in move_choices:
-        # If input is valid, move the player and loop
-        player.travel(cmd)
-    elif cmd == "q":
-        print(f'Thanks for playing, {player_name}!\n')
-        exit() # or break
+
+    # Record how many words the user entered (1 or 2?)
+    # NOTE: .lower()[0] converts input to lowercase and only takes the first character to ultimately match move_choices list items
+    cmd = input(">>> ")
+    input_count = len(cmd.split())
+    print("Input Count: ", input_count)
+
+    # If input_count = 1 treat as navigation command:
+    if input_count == 1:
+        cmd = cmd.lower()[0] # convert to lowercase and only take 1st letter
+        # Parse user inputs (n, s, e, w, q)
+        if cmd in move_choices:
+            # If input is valid, move the player and loop
+            player.travel(cmd)
+        elif cmd == "q":
+            print(f'Thanks for playing, {player_name}!\n')
+            exit() # or break
+        else:
+            print("Invalid key. Please type North, East, South, or West to move or q to quit the game.")
+
+    # If input_count = 2 treat as action command:
+    elif input_count == 2:
+        # handle actions
+        print("Some action")
+    
     else:
-        print("Invalid key. Please type North, East, South, or West to move or q to quit the game.")
+        pass
+    

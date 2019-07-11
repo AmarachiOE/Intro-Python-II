@@ -14,8 +14,8 @@ class Room:
         str = f"""
               \nYour location:
               \n{self.title}
-              \n   {self.description}
-              \n   {self.items}
+              \n   Description: {self.description}
+              \n   Availabile Items: {", ".join([item.name for item in self.items])}
               \n----------------------------------\n"""
         return str
 
