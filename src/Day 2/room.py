@@ -9,11 +9,13 @@ class Room:
         self.s_to = None
         self.e_to = None
         self.w_to = None
+        self.items = []
     def __str__(self):
         str = f"""
               \nYour location:
               \n{self.title}
               \n   {self.description}
+              \n   {self.items}
               \n----------------------------------\n"""
         return str
 

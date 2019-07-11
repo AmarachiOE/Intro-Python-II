@@ -37,14 +37,15 @@ room['treasure'].w_to = room['overlook']
 room['overlook'].e_to = room['treasure']
 
 
-# Create Items
-# rock = 
-# hat = 
-# sandwich = 
-
 #
 # Main
 #
+
+# Create Items
+binoculars = Item("binoculars", "Use the binoculars to see far away places")
+flashlight = Item("flashlight", "Use the flashlight to see in dark places.")
+water = Item("water", "Drink water if you're tired!")
+#print(binoculars.name, flashlight.name, water.name)
 
 # Make a new player object that is currently in the 'outside' room.
 
