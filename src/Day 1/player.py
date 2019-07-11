@@ -6,5 +6,5 @@ class Player:
         self.name = name
         self.current_room = current_room
 
-    def __str__(self):
+    def __str__(self): # not ever printing just {player} yet so this isn't ever seen
         return f'Name: "{self.name}" \n In Room: {self.current_room}'

@@ -17,4 +17,4 @@ class Room:
     This method will print out a string of the Room class object
     """ 
     def __str__(self):
-        return f'"{self.name}" \n Description: "{self.description}"'
+        return f'"{self.name}" \n Description: "{self.description}" \n'

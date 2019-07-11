@@ -23,6 +23,7 @@ earlier adventurers. The only exit is to the south."""),
 
 
 # Link rooms together
+# setting the n_to/s_to/etc. attr on various Room class instances to another instance of Room
 room['outside'].n_to = room['foyer']
 room['foyer'].s_to = room['outside']
 room['foyer'].n_to = room['overlook']
@@ -41,8 +42,8 @@ room['overlook'].e_to = room['treasure']
 # Make a new player object that is currently in the 'outside' room.
 player_name = input("Please type your name: ")
 
-new_player = Player(player_name, room["outside"]) # Player(name, current_room)
-print(f'Welcome {player_name}! Read the room descriptions to navigate to the treasure! \nYour current location is: {new_player.current_room}')
+player = Player(player_name, room["outside"]) # Player(name, current_room)
+print(f'Welcome {player_name}! Read the room descriptions to navigate to the treasure! \nYour current location is: {player.current_room}')
 
 
 # Write a loop that:
@@ -58,7 +59,8 @@ print(f'Welcome {player_name}! Read the room descriptions to navigate to the tre
 move_choices = ["n", "e", "s", "w"]
 
 while True:
-    player_move = input("Type n/e/s/w to move or q to quit the game: ")
+    player_move = input(">>> Type North, East, South, or West to move or q to quit the game: ").lower()[0] # converts input to lowercase and only takes the first character to ultimately match move_choices list items
+    print("Player Move: ", player_move)
     
     if player_move in move_choices:
         """
@@ -66,24 +68,25 @@ while True:
         """
         if player_move == "n":
             # when player moves north
-            new_room = new_player.current_room.n_to
+            new_room = player.current_room.n_to
+            # better way: player.current_room = player.current_room.n_to
 
         elif player_move == "e":
             # when player moves east
-            new_room = new_player.current_room.e_to
+            new_room = player.current_room.e_to
         
         elif player_move == "s":
             # when player moves south
-            new_room = new_player.current_room.s_to
+            new_room = player.current_room.s_to
         
         elif player_move == "w":
             # when player moves west
-            new_room = new_player.current_room.w_to
+            new_room = player.current_room.w_to
 
         """
-        Now change new_player's current_room to the new room
+        Now change player's current_room to the new room
         """
-        new_player = Player(player_name, new_room)
+        player = Player(player_name, new_room)
 
         """
         Alternative, Longer Way - SMH
@@ -92,24 +95,42 @@ while True:
             if value == new_room: # new_room is the variable/info being set from above statements
                 new_room_name = key # set the name of the new room to the key of that value
         # print("Name of New Room: ", new_room_name) # double check that this is correct
-        new_player = Player(player_name, room[new_room_name]) # Cool. Pass in the name of the new room to the room dictionary to update the player's room in the new player's Player class instance
+        player = Player(player_name, room[new_room_name]) # Cool. Pass in the name of the new room to the room dictionary to update the player's room in the new player's Player class instance
         """
 
         
     elif player_move == "q":
-        print(f'Thanks for playing, {player_name}!')
-        break
+        print(f'Thanks for playing, {player_name}!\n')
+        break # or exit()
     
     else:
-        print("Invalid key. Please type n/e/s/w to move or q to quit the game.")
+        print("Invalid key. Please type North, East, South, or West to move or q to quit the game.")
     
     #print(f'Your new location is: {new_room}') # or:
-    print(f'Your new location is: {new_player.current_room}') # also double checks that update was successful
+    print(f'Your new location is: {player.current_room}') # also double checks that update was successful
     
 
 
     # EXTRA NOTES
     # tried using line comprehension to set new room location for player but format was ['room name'] instead of regular 'room name' so went with a different approach
     # room_name = [key for key, value in room.items() if value == new_room] # in weird format...
-    # new_player = Player("Amarachi", room_name)
+    # player = Player("Amarachi", room_name)
     # print("Room_Name: ", room_name)
+
+"""
+# SEAN'S SOLUTION
+def try_direction(direction, current_room):
+    attribute = direction + '_to' # ex. n + _to = n_to
+
+    # Check if inputted direction is one we can move to
+    # Is it a defined option??
+    if hasattr(current_room, attribute):
+        # fetch the new room
+        return getattr(current_room, attribute)
+    else:
+        print("You can't go that way!")
+        return current_room
+
+# Then in while loop:
+player.current_room = try_direction(player_move, player.current_room)
+"""
