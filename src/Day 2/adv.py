@@ -84,8 +84,10 @@ while True:
     # Record how many words the user entered (1 or 2?)
     # NOTE: .lower()[0] converts input to lowercase and only takes the first character to ultimately match move_choices list items
     cmd = input(">>> ")
-    input_count = len(cmd.split())
-    print("Input Count: ", input_count)
+    split_cmd = cmd.split()
+    input_count = len(split_cmd)
+    print("first word: ", split_cmd[0])
+    # print("Input Count: ", input_count)
 
     # If input_count = 1 treat as navigation command:
     if input_count == 1:
@@ -103,7 +105,17 @@ while True:
     # If input_count = 2 treat as action command:
     elif input_count == 2:
         # handle actions
-        print("Some action")
+        print("user entered 2 words")
+        if split_cmd[0] == "get" or split_cmd[0] ==  "take":
+            the_item = split_cmd[1]
+            player.get_item(the_item)
+            
+            print("User entered get or take. Implement get method.")
+        elif split_cmd[0] == "drop":
+            print("User entered drop. Implement drop method.")
+        else:
+            print("Invalid command")
+
     
     else:
         pass
