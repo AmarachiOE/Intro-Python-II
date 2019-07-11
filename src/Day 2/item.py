@@ -1,5 +1,6 @@
 # Write a class to hold item information, e.g. name and description
 
+
 class Item:
     def __init__(self, name, description):
         self.name = name

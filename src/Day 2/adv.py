@@ -44,7 +44,7 @@ room['overlook'].e_to = room['treasure']
 
 # Make a new player object that is currently in the 'outside' room.
 player_name = input("Please type your name: ")
-player = Player(player_name, room['outside']) # Player(name, current_room)
+player = Player(player_name, room['outside'])  # Player(name, current_room)
 current_room = player.current_room
 
 
@@ -66,7 +66,6 @@ print(f'Welcome, {player_name}! Read the room descriptions to navigate to the tr
 move_choices = ["n", "s", "e", "w"]
 
 
-
 # Write a loop that:
 #
 # * Prints the current room name
@@ -80,42 +79,47 @@ move_choices = ["n", "s", "e", "w"]
 
 while True:
     # Wait for user input
-
     # Record how many words the user entered (1 or 2?)
     # NOTE: .lower()[0] converts input to lowercase and only takes the first character to ultimately match move_choices list items
+    
     cmd = input(">>> ")
     split_cmd = cmd.split()
     input_count = len(split_cmd)
-    print("first word: ", split_cmd[0])
+    # print("first word: ", split_cmd[0])
     # print("Input Count: ", input_count)
 
     # If input_count = 1 treat as navigation command:
     if input_count == 1:
-        cmd = cmd.lower()[0] # convert to lowercase and only take 1st letter
+        cmd = cmd.lower()[0]  
         # Parse user inputs (n, s, e, w, q)
         if cmd in move_choices:
             # If input is valid, move the player and loop
             player.travel(cmd)
+        elif cmd == "i":
+            player.show_inventory()
         elif cmd == "q":
             print(f'Thanks for playing, {player_name}!\n')
-            exit() # or break
+            exit()  # or break
         else:
-            print("Invalid key. Please type North, East, South, or West to move or q to quit the game.")
+            print(
+                "Invalid key. Please type North, East, South, or West to move or q to quit the game.")
 
     # If input_count = 2 treat as action command:
     elif input_count == 2:
+
         # handle actions
-        print("user entered 2 words")
-        if split_cmd[0] == "get" or split_cmd[0] ==  "take":
+        # print("user entered 2 words")
+
+        if split_cmd[0] == "get" or split_cmd[0] == "take":
             the_item = split_cmd[1]
             player.on_take(the_item)
 
         elif split_cmd[0] == "drop":
-            print("User entered drop. Implement drop method.")
+            the_item = split_cmd[1]
+            player.on_drop(the_item)
+
         else:
             print("Invalid command")
 
-    
     else:
         pass
-    
